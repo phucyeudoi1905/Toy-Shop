@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if (typeof toy !== 'undefined' && toy) { %>
+        <title><%= toy.name %> - Toy Store</title>
+    <% } else { %>
+        <title>Toy Details - Toy Store</title>
+    <% } %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .toy-detail-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .detail-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <div class="container mt-5 mb-5">
+        <% if (typeof toy !== 'undefined' && toy) { %>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <img src="<%= toy.image %>" alt="<%= toy.name %>" class="toy-detail-image">
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-section">
+                        <h1 class="mb-3"><%= toy.name %></h1>
+                        <span class="category-badge mb-3"><%= toy.category %></span>
+                        <p class="lead text-muted mb-3"><%= toy.description %></p>
+                        <h3 class="price mb-4">$<%= toy.price.toFixed(2) %></h3>
+                        <button class="btn btn-primary btn-lg w-100">Add to Cart</button>
+                        <% if (currentUser && currentUser.role === 'admin') { %>
+                            <div class="admin-actions mt-3">
+                                <a href="/edit-toy/<%= toy._id %>" class="btn btn-outline-secondary me-2">Edit Toy</a>
+                                <form action="/delete-toy/<%= toy._id %>" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this toy?');">
+                                    <button type="submit" class="btn btn-outline-danger">Delete Toy</button>
+                                </form>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        <% } else 
+        { %>
+            <div class="alert alert-warning text-center" role="alert">
+                Toy not found or there was an error loading the details.
+            </div>
+        <% } %>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-link">Back to Collection</a>
+        </div>
+    </div>
+
+    <%- include('./partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

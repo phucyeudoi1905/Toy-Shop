@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Store Website</title>
+
+    <!-- Thư viện Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* Hiệu ứng hover nâng nhẹ thẻ toy-card */
+        .toy-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px; /* khoảng cách dưới mỗi card */
+        }
+        .toy-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Định kích thước ảnh toy */
+        .toy-image {
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar dùng partial EJS -->
+    <%- include('./partials/navbar') %>
+
+    <!-- Hero section giới thiệu -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Amazing Toys for Everyone</h1>
+            <p>Discover our collection of fun and educational toys</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <!-- Tiêu đề bộ sưu tập -->
+                <h2 class="text-center mb-4">Our Collection</h2>
+                
+                <!-- Dòng chứa các thẻ toy -->
+                <div class="row">
+                    <!-- Lặp qua mảng toys (được truyền từ server) -->
+                    <% toys.forEach(toy => { %>
+                        <div class="col-md-4">
+                            <div class="toy-card">
+                                <!-- Link dẫn tới trang chi tiết toy -->
+                                <a href="/toy/<%= toy._id %>" class="text-decoration-none text-dark">
+
+                                    <!-- Phần chứa hình ảnh với container giới hạn chiều cao và cắt tràn -->
+                                    <div style="height: 200px; overflow: hidden;">
+                                        <img 
+                                            src="<%= toy.image %>" 
+                                            class="w-100 h-100 object-fit-cover" 
+                                            alt="<%= toy.name %>"
+                                            style="object-position: center;">
+                                    </div>
+                                    
+                                    <!-- Thông tin chi tiết toy -->
+                                    <div class="card-body">
+                                        <!-- Thẻ thể loại toy -->
+                                        <span class="category-badge"><%= toy.category %></span>
+
+                                        <!-- Tên toy -->
+                                        <h5 class="card-title"><%= toy.name %></h5>
+
+                                        <!-- Mô tả toy, giới hạn 100 ký tự -->
+                                        <p class="card-text-shorten">
+                                            <%= toy.description.substring(0, 100) %><%= toy.description.length > 100 ? '...' : '' %>
+                                        </p>
+
+                                        <!-- Giá toy, hiển thị 2 chữ số thập phân -->
+                                        <p class="price">$<%= toy.price.toFixed(2) %></p>
+                                    </div>
+                                </a>
+
+                                <!-- Phần nút bấm dưới card -->
+                                <div class="card-body border-top">
+                                    <!-- Nút xem chi tiết và thêm vào giỏ -->
+                                    <button class="btn btn-primary w-100 mb-2 view-details-btn" data-toyid="<%= toy._id %>">
+                                        View Details & Add to Cart
+                                    </button>
+
+                                    <!-- Nếu user hiện tại là admin, hiển thị nút chỉnh sửa và xóa -->
+                                    <% if (currentUser && currentUser.role === 'admin') { %>
+                                        <div class="admin-actions mt-2 d-flex justify-content-between">
+                                            <!-- Nút chỉnh sửa toy -->
+                                            <a href="/edit-toy/<%= toy._id %>" class="btn btn-sm btn-outline-secondary w-50 me-1">Edit</a>
+
+                                            <!-- Form xóa toy có xác nhận -->
+                                            <form action="/delete-toy/<%= toy._id %>" method="POST" class="d-inline w-50 ms-1" 
+                                                onsubmit="return confirm('Are you sure you want to delete this toy?');">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Delete</button>
+                                            </form>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer dùng partial EJS -->
+    <%- include('./partials/footer') %>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Thêm sự kiện click cho các nút 'View Details & Add to Cart'
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const toyId = this.dataset.toyid; // lấy id toy từ thuộc tính data-toyid
+                // Chuyển trang tới chi tiết toy tương ứng
+                window.location.href = `/toy/${toyId}`;
+            });
+        });
+    </script>
+</body>
+</html>

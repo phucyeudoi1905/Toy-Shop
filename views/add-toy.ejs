@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Đặt encoding để hỗ trợ ký tự đặc biệt -->
+    <meta charset="UTF-8">
+    <!-- Thiết lập hiển thị responsive cho thiết bị di động -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Toy - Toy Store</title>
+
+    <!-- Nạp thư viện Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Nạp font Poppins từ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Nạp file CSS tùy chỉnh -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Nhúng thanh điều hướng từ file partial -->
+    <%- include('./partials/navbar') %>
+
+    <!-- Container chứa form thêm đồ chơi -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Hộp chứa form có border và bóng đổ đẹp -->
+                <div class="form-container">
+                    <h2 class="text-center mb-4">Add New Toy</h2>
+
+                    <!-- Gửi form bằng phương thức POST đến server -->
+                    <form action="/add-toy" method="POST">
+                        <!-- Tên đồ chơi -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Toy Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+
+                        <!-- Mô tả đồ chơi -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+
+                        <!-- Giá đồ chơi -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <!-- URL hình ảnh đồ chơi -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="image" name="image" required>
+                            <div class="form-text">Enter a valid image URL (e.g., https://example.com/image.jpg)</div>
+                        </div>
+
+                        <!-- Danh mục đồ chơi -->
+                        <div class="mb-4">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="">Select a category</option>
+                                <option value="Educational">Educational</option>
+                                <option value="Action Figures">Action Figures</option>
+                                <option value="Board Games">Board Games</option>
+                                <option value="Outdoor">Outdoor</option>
+                                <option value="Plush Toys">Plush Toys</option>
+                            </select>
+                        </div>
+
+                        <!-- Nút submit -->
+                        <button type="submit" class="btn btn-primary w-100">Add Toy</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nhúng phần footer -->
+    <%- include('./partials/footer') %>
+
+    <!-- Nạp thư viện JS của Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

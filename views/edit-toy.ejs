@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Toy - Toy Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container p-4">
+                    <h2 class="text-center mb-4">Edit Toy Details</h2>
+                    
+                    <% if (typeof toy !== 'undefined') { %>
+                        <form action="/edit-toy/<%= toy._id %>" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Toy Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= toy.name %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" required><%= toy.description %></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= toy.price %>" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Image URL</label>
+                                <input type="url" class="form-control" id="image" name="image" value="<%= toy.image %>" required>
+                                <div class="form-text">Enter a valid image URL (e.g., https://example.com/image.jpg)</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="category" class="form-label">Category</label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select a category</option>
+                                    <% const categories = ["Educational", "Action Figures", "Board Games", "Outdoor", "Plush Toys"]; %>
+                                    <% categories.forEach(cat => { %>
+                                        <option value="<%= cat %>" <%= toy.category === cat ? 'selected' : '' %>><%= cat %></option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Update Toy</button>
+                        </form>
+                    <% } else { %>
+                        <p class="text-center">Toy not found or error loading data.</p>
+                    <% } %>
+                    <p class="text-center mt-3"><a href="/" class="btn btn-link" >Back to Collection</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
