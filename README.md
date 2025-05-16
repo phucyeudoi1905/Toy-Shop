@@ -1,56 +1,74 @@
-# Food Ordering Website
 
-A simple food ordering website built with Node.js, Express, and MongoDB.
+# 🧸 Toy Shop Website
 
-## Features
+🎉 **Chào mừng đến với Toy Shop Website** – một trang web đặt đồ ăn (nhưng với chút phép màu của thế giới đồ chơi)!  
+Được xây dựng bằng 💚 **Node.js**, ⚡ **Express**, và 🛢️ **MongoDB**!
 
-- View food menu
-- Add new food items
-- Responsive design
-- Category-based food organization
+---
 
-## Prerequisites
+## ✨ Tính năng nổi bật
 
-- Node.js (v14 or higher)
-- MongoDB (v4.4 or higher)
+🍔 Xem menu món ăn cực xịn  
+🧁 Thêm món mới thật dễ dàng  
+📱 Thiết kế responsive – đẹp mọi lúc, mọi nơi  
+🍱 Sắp xếp món ăn theo danh mục siêu tiện lợi  
 
-## Installation
+---
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd food-ordering-website
-```
+## 📦 Yêu cầu trước khi cài đặt
 
-2. Install dependencies:
-```bash
-npm install
-```
+- 🧑‍💻 [Node.js](https://nodejs.org/) (phiên bản 14 trở lên)
+- 🛢️ [MongoDB](https://www.mongodb.com/) (phiên bản 4.4 trở lên)
 
-3. Make sure MongoDB is running on your system
+---
 
-4. Start the application:
-```bash
-npm start
-```
+## 🚀 Cài đặt nhanh trong vài bước
 
-For development with auto-reload:
-```bash
-npm run dev
-```
+1. 🧭 Clone repo về máy:
+   ```bash
+   git clone <repository-url>
+   cd food-ordering-website
+   ```
 
-The application will be available at `http://localhost:3000`
+2. 📦 Cài đặt các gói cần thiết:
+   ```bash
+   npm install
+   ```
 
-## Usage
+3. ⚙️ Đảm bảo MongoDB đang chạy trên máy bạn
 
-1. Visit the homepage to view the food menu
-2. Click "Add New Food" to add new food items
-3. Fill in the required information and submit the form
+4. ▶️ Khởi động ứng dụng:
+   ```bash
+   npm start
+   ```
 
-## Technologies Used
+   Hoặc để phát triển với chế độ tự reload:
+   ```bash
+   npm run dev
+   ```
 
-- Node.js
-- Express.js
-- MongoDB
-- EJS (Template Engine)
-- Bootstrap 5 
+🔗 Truy cập website tại: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🍽️ Hướng dẫn sử dụng
+
+1. 🏠 Truy cập trang chủ để xem menu đồ ăn  
+2. ➕ Nhấn vào "Add New Food" để thêm món mới  
+3. 📝 Điền đầy đủ thông tin và bấm **Gửi** – thế là xong!
+
+---
+
+## 🛠️ Công nghệ được sử dụng
+
+- 🌱 Node.js  
+- ⚡ Express.js  
+- 🍃 MongoDB  
+- 🎨 EJS (Template Engine)  
+- 🎀 Bootstrap 5
+
+---
+
+💖 Cảm ơn bạn đã ghé thăm!  
+Nếu thấy thích, hãy ⭐ repo nhé! 🥰  
+Chúc bạn code vui vẻ và có một ngày thật tuyệt! 🌈✨
